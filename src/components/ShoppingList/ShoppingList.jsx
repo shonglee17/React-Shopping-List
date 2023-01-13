@@ -1,42 +1,21 @@
 import axios from "axios";
-import React from "react";
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 93e2d02247c3f1449f8af8aa2a78630c19927cb6
+import { React } from "react";
 function ShoppingList({ shoppingList, getList }){
     
-    function removeItem () {
-        let idToDelete = shoppingList.id;
-        console.log(idToDelete);
-<<<<<<< HEAD
-=======
-
->>>>>>> 93e2d02247c3f1449f8af8aa2a78630c19927cb6
+    function removeItem (id) {
+        console.log(id);
         axios({
             method: 'DELETE',
-            url: `/shoppinglist/id`
+            url: `/shoppinglist/${id}`
           }).then((response) => {
+            console.log(response);
             getList();
           }).catch((error) => {
-            console.log('deleteCreature() sure broke:', error);
+            console.log('removeItem() in ShoppingList broke:', error);
           })
-<<<<<<< HEAD
     }
     function onBuy () {
-
     }
-   
-=======
-
-    }
-
-    function onBuy () {
-
-    }
-
->>>>>>> 93e2d02247c3f1449f8af8aa2a78630c19927cb6
     return (
         <>
             <h2>Shopping List</h2>
@@ -50,7 +29,7 @@ function ShoppingList({ shoppingList, getList }){
                     </li>
                     <div>
                         <button onClick={onBuy}>Buy</button>
-                        <button onClick={removeItem}>Remove</button>
+                        <button onClick={ () => removeItem(item.id) }>Remove</button>
                     </div>
                 </div>
             ))}
@@ -59,8 +38,4 @@ function ShoppingList({ shoppingList, getList }){
         </>
     )
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 93e2d02247c3f1449f8af8aa2a78630c19927cb6
 export default ShoppingList;
