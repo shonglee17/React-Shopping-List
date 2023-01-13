@@ -43,8 +43,8 @@ const createList = () => {
 }
     return (
   <>
+  <Header />
   <h1>Add an Item</h1>
-   <Header />
   <form onSubmit={createList}>
     <label>Item: </label>
     <input
