@@ -14,28 +14,49 @@ function ShoppingList({ shoppingList, getList }){
             console.log('removeItem() in ShoppingList broke:', error);
           })
     }
+
+
+
     function onBuy () {
+        if (!item.status) {
+            return (
+                <>
+                    <button onClick={() => buyItem(item.id)}>Buy</button>
+                    <button onClick={() => removeItem(item.id)}>Remove</button>
+                </>
+            )
+        } else {
+            return <span>Purchased</span>
+        }
     }
     return (
-        <>
+    <>
             <h2>Shopping List</h2>
             <button>Reset</button>
             <button>Clear</button>
-            <ul>
-            {shoppingList.map(item => (
-                <div key={item.id}>
-                    <li>
-                        {item.name}: {item.quantity}
-                    </li>
-                    <div>
-                        <button onClick={onBuy}>Buy</button>
-                        <button onClick={ () => removeItem(item.id) }>Remove</button>
-                    </div>
-                </div>
-            ))}
-            </ul>
         
-        </>
-    )
+<ul>
+    {shoppingList.map((item) => (
+        <li key={item.id}>
+            {item.name} {item.quantity}
+            <span> 
+            {item.status === true ? 'Purchased': 
+                    <>   
+                        <button onClick={() => buyItem(item.id)}>Buy</button>
+                        <button onClick={() => removeItem(item.id)}>Remove</button> 
+                    </>
+            } 
+            </span>
+          
+            
+            
+
+            
+        </li>
+    ))}
+</ul>
+
+   </> 
+);
 }
 export default ShoppingList;
