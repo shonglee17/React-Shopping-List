@@ -106,10 +106,20 @@ app.put('/shoppinglist/:id', (req,res)=>{
     })
 })
 
-
-
-
-
+app.put('/reset', (req,res)=>{
+  let sqlQuery = `
+  UPDATE "shoppinglist"
+      SET "status" = false;
+  `;
+  pool.query(sqlQuery)
+  .then((dbRes)=>{
+      console.log('successful update from put: serverside');
+      res.sendStatus(201)
+  }).catch(( dbErr)=>{
+      console.log('broke in PUT serverside', dbErr);
+      res.sendStatus(500)
+  })
+})
 
 /** ---------- START SERVER ---------- **/
 app.listen(PORT,  () => {

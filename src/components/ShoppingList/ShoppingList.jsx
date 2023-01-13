@@ -27,8 +27,17 @@ function ShoppingList({ shoppingList, getList }){
             console.log('clearList() sure broke:', error);
           })
     }
-
-
+    
+    function resetList(){
+        axios({
+            method: 'PUT',
+            url: '/reset'
+          }).then((response) => {
+            getList();
+          }).catch((error) => {
+            console.log('clearList() sure broke:', error);
+          })
+    }
 
     function onBuy (status, id) {
         axios({
@@ -45,12 +54,6 @@ function ShoppingList({ shoppingList, getList }){
         if (status === false ) {
             console.log ('hi')
             setStatus (true)
-            // return (
-            //     <>
-            //         <button onClick={() => buyItem(item.id)}>Buy</button>
-            //         <button onClick={() => removeItem(item.id)}>Remove</button>
-            //     </>
-            // )
         } else {
             return <span>Purchased</span>
         }
@@ -58,7 +61,7 @@ function ShoppingList({ shoppingList, getList }){
     return (
     <>
             <h2>Shopping List</h2>
-            <button>Reset</button>
+            <button onClick={resetList}>Reset</button>
             <button onClick={clearList}>Clear</button>
         
 <ul>
