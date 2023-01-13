@@ -41,13 +41,9 @@ const createList = () => {
     console.log('createList error:', error);
   })
     return (
-<<<<<<< HEAD
-        <div className="App">
-            <Header />
-            <ShoppingList/>
-        </div>
-    );
-=======
+
+        
+
   <>
   <h1>Add an Item</h1>
    <Header />
@@ -68,7 +64,7 @@ const createList = () => {
     />
     <button type = "submit">Save</button>
   </form>
-  <>
+ 
    <div className="App">
       <main>
       <ShoppingList shoppingList={shoppingList} getList={getList}/>
@@ -76,6 +72,6 @@ const createList = () => {
    </div>
   </>
 )
->>>>>>> 93e2d02247c3f1449f8af8aa2a78630c19927cb6
+
 }
 export default App;
