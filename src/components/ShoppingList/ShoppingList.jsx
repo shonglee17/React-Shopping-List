@@ -1,7 +1,8 @@
 import axios from "axios";
-import { React } from "react";
+import { React, useState } from "react";
 function ShoppingList({ shoppingList, getList }){
-    
+    const [status,setStatus] = useState (false);
+
     function removeItem (id) {
         console.log(id);
         axios({
@@ -29,14 +30,27 @@ function ShoppingList({ shoppingList, getList }){
 
 
 
-    function onBuy () {
-        if (!item.status) {
-            return (
-                <>
-                    <button onClick={() => buyItem(item.id)}>Buy</button>
-                    <button onClick={() => removeItem(item.id)}>Remove</button>
-                </>
-            )
+    function onBuy (status, id) {
+        axios({
+            method: 'PUT',
+            url: `/shoppinglist/${id}`,
+            data: {
+                status: true
+            }
+        }).then ((response) => {
+            getList();
+        }).catch ((error) => {
+            console.log('PUT', error);
+          })
+        if (status === false ) {
+            console.log ('hi')
+            setStatus (true)
+            // return (
+            //     <>
+            //         <button onClick={() => buyItem(item.id)}>Buy</button>
+            //         <button onClick={() => removeItem(item.id)}>Remove</button>
+            //     </>
+            // )
         } else {
             return <span>Purchased</span>
         }
@@ -54,7 +68,7 @@ function ShoppingList({ shoppingList, getList }){
             <span> 
             {item.status === true ? 'Purchased': 
                     <>   
-                        <button onClick={() => buyItem(item.id)}>Buy</button>
+                        <button onClick={() => onBuy(item.status,item.id)}>Buy</button>
                         <button onClick={() => removeItem(item.id)}>Remove</button> 
                     </>
             } 
