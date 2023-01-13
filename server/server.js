@@ -69,6 +69,23 @@ app.delete('/shoppinglist/:id', (req, res) => {
       })
   })
 
+  app.delete('/clear', (req, res) => {
+    console.log(req.params);
+    console.log('test')
+    let sqlQuery = `
+      DELETE FROM "shoppinglist";       
+    `;
+    pool.query(sqlQuery)
+      .then((dbRes) => {
+        // That worked! Tell "OK" to the client:
+        res.sendStatus(200);
+      })
+      .catch((dbErr) => {
+        console.log('shit broke in DELETE /clear', dbErr);
+        res.sendStatus(500);
+      })
+  })
+
 // PUT ROUTE //
 app.put('/shoppinglist/:id', (req,res)=>{
     let idToUpdate = req.params.id

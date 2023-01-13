@@ -15,6 +15,18 @@ function ShoppingList({ shoppingList, getList }){
           })
     }
 
+    function clearList(){
+        
+        axios({
+            method: 'DELETE',
+            url: '/clear'
+          }).then((response) => {
+            getList();
+          }).catch((error) => {
+            console.log('clearList() sure broke:', error);
+          })
+    }
+
 
 
     function onBuy () {
@@ -33,7 +45,7 @@ function ShoppingList({ shoppingList, getList }){
     <>
             <h2>Shopping List</h2>
             <button>Reset</button>
-            <button>Clear</button>
+            <button onClick={clearList}>Clear</button>
         
 <ul>
     {shoppingList.map((item) => (
