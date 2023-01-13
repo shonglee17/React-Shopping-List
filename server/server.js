@@ -49,6 +49,43 @@ app.post('/shoppinglist', (req, res) => {
 
 
 // DELETE ROUTE //
+app.delete('/shoppinglist/:id', (req, res) => {
+    console.log(req.params);
+    let idToDelete = req.params.id;
+  
+    let sqlQuery = `
+      DELETE FROM "shoppinglist"
+        WHERE "id"=$1;        
+    `
+    let sqlValues = [idToDelete];
+    pool.query(sqlQuery, sqlValues)
+      .then((dbRes) => {
+        // That worked! Tell "OK" to the client:
+        res.sendStatus(200);
+      })
+      .catch((dbErr) => {
+        console.log('shit broke in DELETE /shoppinglist/:id', dbErr);
+        res.sendStatus(500);
+      })
+  })
+
+  app.delete('/clear', (req, res) => {
+    console.log(req.params);
+    console.log('test')
+
+    let sqlQuery = `
+      DELETE FROM "shoppinglist";       
+    `;
+    pool.query(sqlQuery)
+      .then((dbRes) => {
+        // That worked! Tell "OK" to the client:
+        res.sendStatus(200);
+      })
+      .catch((dbErr) => {
+        console.log('shit broke in DELETE /clear', dbErr);
+        res.sendStatus(500);
+      })
+  })
 
 
 

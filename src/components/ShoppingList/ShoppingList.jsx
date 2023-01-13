@@ -1,47 +1,43 @@
 import axios from "axios";
 import React from "react";
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 93e2d02247c3f1449f8af8aa2a78630c19927cb6
 function ShoppingList({ shoppingList, getList }){
     
-    function removeItem () {
-        let idToDelete = shoppingList.id;
-        console.log(idToDelete);
-<<<<<<< HEAD
-=======
+    function removeItem (id) {
 
->>>>>>> 93e2d02247c3f1449f8af8aa2a78630c19927cb6
         axios({
             method: 'DELETE',
-            url: `/shoppinglist/id`
+            url: `/shoppinglist/${id}`
           }).then((response) => {
             getList();
           }).catch((error) => {
-            console.log('deleteCreature() sure broke:', error);
+            console.log('removeItem() sure broke:', error);
           })
-<<<<<<< HEAD
+
     }
+
+    function clearList(){
+        
+        axios({
+            method: 'DELETE',
+            url: '/clear'
+          }).then((response) => {
+            getList();
+          }).catch((error) => {
+            console.log('clearList() sure broke:', error);
+          })
+
+    }
+
     function onBuy () {
 
     }
    
-=======
-
-    }
-
-    function onBuy () {
-
-    }
-
->>>>>>> 93e2d02247c3f1449f8af8aa2a78630c19927cb6
     return (
         <>
             <h2>Shopping List</h2>
             <button>Reset</button>
-            <button>Clear</button>
+            <button onClick={clearList}>Clear</button>
             <ul>
             {shoppingList.map(item => (
                 <div key={item.id}>
@@ -50,7 +46,7 @@ function ShoppingList({ shoppingList, getList }){
                     </li>
                     <div>
                         <button onClick={onBuy}>Buy</button>
-                        <button onClick={removeItem}>Remove</button>
+                        <button onClick={ () => removeItem(item.id)}>Remove</button>
                     </div>
                 </div>
             ))}
@@ -59,8 +55,4 @@ function ShoppingList({ shoppingList, getList }){
         </>
     )
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 93e2d02247c3f1449f8af8aa2a78630c19927cb6
 export default ShoppingList;

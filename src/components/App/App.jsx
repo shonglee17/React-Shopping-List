@@ -4,11 +4,10 @@ import axios from 'axios';
 import Header from '../Header/Header.jsx'
 import ShoppingList from '../ShoppingList/ShoppingList.jsx';
 import './App.css';
-import ShoppingList from '../ShoppingList/ShoppingList.jsx';
 
 
 function App() {
-    const [shoppinglist, setList] = useState([]);
+    const [shoppingList, setList] = useState([]);
     const [nameInput, setNameInput] = useState('');
     const [quantityInput, setQuantityInput] = useState('');
 
@@ -40,10 +39,8 @@ const createList = () => {
   }).catch((error) => {
     console.log('createList error:', error);
   })
-    return (
-
-        
-
+}  
+  return (
   <>
   <h1>Add an Item</h1>
    <Header />
@@ -67,11 +64,12 @@ const createList = () => {
  
    <div className="App">
       <main>
-      <ShoppingList shoppingList={shoppingList} getList={getList}/>
+      <ShoppingList shoppingList={shoppingList} getList={getList} setList={setList}/>
       </main>
    </div>
   </>
 )
-
 }
-export default App;
+
+
+export default App
